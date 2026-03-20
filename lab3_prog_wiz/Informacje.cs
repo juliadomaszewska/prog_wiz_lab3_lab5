@@ -21,7 +21,7 @@ namespace lab3_prog_wiz
             button2.Click += Anuluj_Click;
 
         }
-        private void Zatwierdz_Click(object sender, EventArgs e)
+        private void Zatwierdz_Click(object? sender, EventArgs e)
         {
             string imie = textBox1.Text;
             string nazwisko = textBox2.Text;
@@ -38,7 +38,7 @@ namespace lab3_prog_wiz
                 this.Close();
             }
         }
-        private void Anuluj_Click(object sender, EventArgs e)
+        private void Anuluj_Click(object? sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
