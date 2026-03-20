@@ -38,61 +38,61 @@
             // 
             // button1
             // 
-            button1.Location = new Point(25, 320);
+            button1.Location = new Point(86, 430);
             button1.Name = "button1";
-            button1.Size = new Size(165, 32);
+            button1.Size = new Size(236, 32);
             button1.TabIndex = 0;
             button1.Text = "Zapis do .csv";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(249, 320);
+            button2.Location = new Point(379, 430);
             button2.Name = "button2";
-            button2.Size = new Size(165, 32);
+            button2.Size = new Size(236, 32);
             button2.TabIndex = 1;
             button2.Text = "Odczyt z .csv";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(454, 63);
+            button3.Location = new Point(718, 24);
             button3.Name = "button3";
-            button3.Size = new Size(103, 39);
+            button3.Size = new Size(116, 42);
             button3.TabIndex = 2;
             button3.Text = "Dodaj";
             button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            button4.Location = new Point(454, 125);
+            button4.Location = new Point(718, 83);
             button4.Name = "button4";
-            button4.Size = new Size(103, 39);
+            button4.Size = new Size(116, 42);
             button4.TabIndex = 3;
-            button4.Text = "Usun";
+            button4.Text = "Usuń";
             button4.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(25, 31);
+            dataGridView1.Location = new Point(21, 24);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(389, 267);
+            dataGridView1.Size = new Size(677, 380);
             dataGridView1.TabIndex = 4;
             // 
             // Glowne_okno
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(596, 375);
+            ClientSize = new Size(880, 474);
             Controls.Add(dataGridView1);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "Glowne_okno";
-            Text = "Form1";
+            Text = "Informacje o pracownikach";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
