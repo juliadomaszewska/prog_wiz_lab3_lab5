@@ -30,6 +30,37 @@ namespace lab3_prog_wiz
 
         }
 
+        public class Osoba
+        {
+            public int ID { get; set; }
+            public string Imie { get; set; }
+            public string Nazwisko { get; set; }
+            public int Wiek { get; set; }
+            public string Stanowisko { get; set; }
+
+            private static int globalId = 1;
+
+            public Osoba() { }
+
+            public Osoba(string imie, string nazwisko, int wiek, string stanowisko)
+            {
+                ID = globalId++;
+                Imie = imie;
+                Nazwisko = nazwisko;
+                Wiek = wiek;
+                Stanowisko = stanowisko;
+            }
+
+            public void DisplayInfo()
+            {
+                Console.WriteLine("ID: " + ID);
+                Console.WriteLine("Imię: " + Imie);
+                Console.WriteLine("Nazwisko: " + Nazwisko);
+                Console.WriteLine("Wiek: " + Wiek);
+                Console.WriteLine("Stanowisko: " + Stanowisko);
+            }
+        }
+
         public void DodajDoTabeli(string imie, string nazwisko, string wiek, string stanowisko)
         {
             var dataTable = (System.Data.DataTable)bindingSource1.DataSource;
@@ -96,7 +127,7 @@ namespace lab3_prog_wiz
             DataTable dataTable = (System.Data.DataTable)bindingSource1.DataSource;
             dataTable.Rows.Clear();
 
-            for (int i = 1; i < lines.Length; i++) 
+            for (int i = 1; i < lines.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(lines[i])) continue;
 
@@ -124,6 +155,11 @@ namespace lab3_prog_wiz
             {
                 LoadCSVToDataGridView(openFileDialog1.FileName);
             }
+        }
+
+        private void btnJSON_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

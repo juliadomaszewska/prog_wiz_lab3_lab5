@@ -33,23 +33,24 @@
             button3 = new Button();
             button4 = new Button();
             dataGridView1 = new DataGridView();
+            btnJSON = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(86, 430);
+            button1.Location = new Point(21, 430);
             button1.Name = "button1";
-            button1.Size = new Size(236, 32);
+            button1.Size = new Size(194, 32);
             button1.TabIndex = 0;
             button1.Text = "Zapis do .csv";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(379, 430);
+            button2.Location = new Point(266, 430);
             button2.Name = "button2";
-            button2.Size = new Size(236, 32);
+            button2.Size = new Size(194, 32);
             button2.TabIndex = 1;
             button2.Text = "Odczyt z .csv";
             button2.UseVisualStyleBackColor = true;
@@ -81,11 +82,22 @@
             dataGridView1.Size = new Size(677, 380);
             dataGridView1.TabIndex = 4;
             // 
+            // btnJSON
+            // 
+            btnJSON.Location = new Point(504, 430);
+            btnJSON.Name = "btnJSON";
+            btnJSON.Size = new Size(194, 32);
+            btnJSON.TabIndex = 5;
+            btnJSON.Text = "Serializacja do JSON";
+            btnJSON.UseVisualStyleBackColor = true;
+            btnJSON.Click += btnJSON_Click;
+            // 
             // Glowne_okno
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(880, 474);
+            Controls.Add(btnJSON);
             Controls.Add(dataGridView1);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -104,5 +116,6 @@
         private Button button3;
         private Button button4;
         private DataGridView dataGridView1;
+        private Button btnJSON;
     }
 }
