@@ -65,17 +65,6 @@ namespace lab3_prog_wiz
                 Console.WriteLine("Lista obiektów została zserializowana do pliku XML.");
             }
 
-            public static System.Collections.Generic.List<Osoba> DeserializeFromXML(string fileName)
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(System.Collections.Generic.List<Osoba>));
-                using (TextReader reader = new StreamReader(fileName))
-                {
-                    var osoby = (System.Collections.Generic.List<Osoba>)serializer.Deserialize(reader);
-                    Console.WriteLine("Lista obiektów została odczytana z pliku XML.");
-                    return osoby;
-                }
-            }
-
             public void DisplayInfo()
             {
                 Console.WriteLine("ID: " + ID);
@@ -139,58 +128,6 @@ namespace lab3_prog_wiz
             }
         }
 
-        private void ExportToXML(string filePath)
-        {
-            System.Collections.Generic.List<Osoba> listaOsob = new System.Collections.Generic.List<Osoba>();
-            var dataTable = (System.Data.DataTable)bindingSource1.DataSource;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                string imie = row["Imie"]?.ToString() ?? "";
-                string nazwisko = row["Nazwisko"]?.ToString() ?? "";
-                int.TryParse(row["Wiek"]?.ToString(), out int wiek);
-                string stanowisko = row["Stanowisko"]?.ToString() ?? "";
-
-                Osoba o = new Osoba(imie, nazwisko, wiek, stanowisko);
-                o.ID = Convert.ToInt32(row["ID"]);
-                listaOsob.Add(o);
-            }
-
-            Osoba.SerializeToXML(listaOsob, filePath);
-        }
-
-        private void btnXML_Click(object? sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Pliki XML (*.xml)|*.xml|Wszystkie pliki (*.*)|*.*";
-            saveFileDialog1.Title = "Wybierz lokalizację zapisu pliku XML";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName != "")
-            {
-                ExportToXML(saveFileDialog1.FileName);
-                MessageBox.Show("Dane zostały zserializowane i zapisane do pliku XML.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void btnLoadXML_Click(object? sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Pliki XML (*.xml)|*.xml|Wszystkie pliki (*.*)|*.*";
-            openFileDialog1.Title = "Wybierz plik XML do wczytania";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK && openFileDialog1.FileName != "")
-            {
-                var odczytaneOsoby = Osoba.DeserializeFromXML(openFileDialog1.FileName);
-                if (odczytaneOsoby != null)
-                {
-                    DataTable dataTable = (System.Data.DataTable)bindingSource1.DataSource;
-                    dataTable.Rows.Clear();
-                    foreach (var o in odczytaneOsoby)
-                    {
-                        dataTable.Rows.Add(o.ID, o.Imie, o.Nazwisko, o.Wiek, o.Stanowisko);
-                    }
-                }
-            }
-        }
-
         private void LoadCSVToDataGridView(string filePath)
         {
             if (!File.Exists(filePath))
@@ -230,6 +167,38 @@ namespace lab3_prog_wiz
             if (openFileDialog1.FileName != "")
             {
                 LoadCSVToDataGridView(openFileDialog1.FileName);
+            }
+        }
+
+        private void ExportToXML(string filePath)
+        {
+            System.Collections.Generic.List<Osoba> listaOsob = new System.Collections.Generic.List<Osoba>();
+            var dataTable = (System.Data.DataTable)bindingSource1.DataSource;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string imie = row["Imie"]?.ToString() ?? "";
+                string nazwisko = row["Nazwisko"]?.ToString() ?? "";
+                int.TryParse(row["Wiek"]?.ToString(), out int wiek);
+                string stanowisko = row["Stanowisko"]?.ToString() ?? "";
+
+                Osoba o = new Osoba(imie, nazwisko, wiek, stanowisko);
+                o.ID = Convert.ToInt32(row["ID"]);
+                listaOsob.Add(o);
+            }
+
+            Osoba.SerializeToXML(listaOsob, filePath);
+        }
+
+        private void btnXML_Click(object? sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Pliki XML (*.xml)|*.xml|Wszystkie pliki (*.*)|*.*";
+            saveFileDialog1.Title = "Wybierz lokalizację zapisu pliku XML";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName != "")
+            {
+                ExportToXML(saveFileDialog1.FileName);
+                MessageBox.Show("Dane zostały zserializowane i zapisane do pliku XML.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
