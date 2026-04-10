@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace lab3_prog_wiz
 {
@@ -159,7 +160,33 @@ namespace lab3_prog_wiz
 
         private void btnJSON_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Pliki JSON (*.json)|*.json|Wszystkie pliki (*.*)|*.*";
+            saveFileDialog1.Title = "Wybierz lokalizację zapisu pliku JSON";
 
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK && saveFileDialog1.FileName != "")
+            {
+                System.Collections.Generic.List<Osoba> listaOsob = new System.Collections.Generic.List<Osoba>();
+                var dataTable = (System.Data.DataTable)bindingSource1.DataSource;
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    string imie = row["Imie"]?.ToString() ?? "";
+                    string nazwisko = row["Nazwisko"]?.ToString() ?? "";
+                    int.TryParse(row["Wiek"]?.ToString(), out int wiek);
+                    string stanowisko = row["Stanowisko"]?.ToString() ?? "";
+
+                    Osoba o = new Osoba(imie, nazwisko, wiek, stanowisko);
+                    o.ID = Convert.ToInt32(row["ID"]);
+                    listaOsob.Add(o);
+                }
+
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string jsonString = JsonSerializer.Serialize(listaOsob, options);
+                File.WriteAllText(saveFileDialog1.FileName, jsonString);
+
+                MessageBox.Show("Dane zostały zserializowane i zapisane do pliku JSON.", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
